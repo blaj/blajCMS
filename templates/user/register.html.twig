@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block title %}Zarejestruj się{% endblock %}
+
+{% block body %}
+    <div class="panel">
+        <h3>Zarejestruj się</h3>
+        <hr>
+
+        {% for flashMessage in app.session.flashbag.get('success') %}
+            <div class="alert alert-success">{{ flashMessage }}</div>
+        {% endfor %}
+
+        {{ form(form) }}
+    </div>
+{% endblock %}

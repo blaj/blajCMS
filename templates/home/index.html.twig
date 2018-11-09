@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Strona Główna{% endblock %}
+
+{% block body %}
+    {% if articles.currentPageResults %}
+        {% for article in articles.currentPageResults %}
+            <article class="panel">
+                <div class="media">
+                    <img class="mr-2 thumbnail" src="{{ asset(article.image) }}" alt="">
+                    <div class="media-body">
+                        <div class="description">
+                            <h1><a href="{{ path('article_show', {'id': article.id}) }}">{{ article.title }}</a></h1>
+                            Napisany przez <a href="{{ path('user_show', {'id': article.user.id}) }}">{{ article.user.username }}</a>, {{ article.createdAt | date('d/m/y') }}
+                        </div>
+                        <p>{{ article.content[:300] ~ '...' }} <a href="{{ path('article_show', {'id': article.id}) }}">Czytaj całość</a></p>
+                    </div>
+                </div>
+            </article>
+        {% endfor %}
+    {% endif %}
+
+    <div class="d-flex justify-content-center">
+        {{ pagerfanta(articles, 'twitter_bootstrap4', {
+            'routeName': 'home_page',
+            'routeParams': {},
+            'next_message': 'Dalej →',
+            'prev_message': '← Wstecz'
+        }) }}
+    </div>
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block title %}Wiadomości{% endblock %}
+
+{% block body %}
+    <div class="panel">
+        <h3>{{ topic.title }}</h3>
+        <hr>
+
+        {% for flashMessage in app.session.flashbag.get('success') %}
+            <div class="alert alert-success">{{ flashMessage }}</div>
+        {% endfor %}
+
+        {% for message in topic.messages %}
+
+            <div class="media">
+                <img class="mr-2 thumbnail" width="80" height="80" src="{{ asset('upload/avatar/') ~ message.user.avatar }}" alt="">
+                <div class="media-body comment p-3">
+                    <div class="description">
+                        <div class="float-left">
+                            Wysłana przez <b><a href="{{ path('user_show', {'id': message.user.id}) }}">{{ message.user.username }}</a></b>, {{ message.sendAt | date('d/m/y, H:i') }}
+                        </div>
+                    </div>
+                    <div class="float-left mt-1 comment_actions">
+                        <p>{{ message.content }}</p>
+                    </div>
+                </div>
+            </div>
+
+        {% endfor %}
+        <hr>
+
+        {{ form(form) }}
+    </div>
+{% endblock %}

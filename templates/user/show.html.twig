@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Informacje{% endblock %}
+
+{% block body %}
+    <div class="panel">
+        <h3>Informacje o użytkowniku</h3>
+        <hr>
+
+        <div class="media">
+            <img class="mr-2 thumbnail" width="150" height="150" src="{{ asset('upload/avatar/') ~ user.avatar }}" alt="">
+            <div class="media-body">
+                <div class="description">
+                    <h1>{{ user.username }}</h1>
+                </div>
+                <p class="p-0 m-0"><b>Komentarzy: </b>{{ user.comments | length }}</p>
+                <p class="p-0 m-0"><b>Konto utworzone: </b>{{ user.registeredAt | date('d/m/y, H:i') }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

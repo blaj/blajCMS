@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block body %}
+    <article class="panel">
+        <div class="media">
+            <img class="mr-2 thumbnail" src="{{ asset(article.image) }}" alt="">
+            <div class="media-body">
+                <div class="description">
+                    <h1>{{ article.title }}</h1>
+                    Napisany przez <a href="{{ path('user_show', {'id': article.user.id}) }}">{{ article.user.username }}</a>, {{ article.createdAt | date('d/m/y') }}
+                </div>
+                <p>{{ article.content }}</p>
+            </div>
+        </div>
+        <hr>
+
+        {% for flashMessage in app.session.flashbag.get('success') %}
+            <div class="alert alert-success">{{ flashMessage }}</div>
+        {% endfor %}
+
+        {% if app.user %}
+            {{ form(form) }}
+        {% endif %}
+        {% if article.comments %}
+            {% for comment in article.comments|sort|reverse  %}
+                {{ include('home/comment.html.twig', { 'comment': comment}) }}
+            {% endfor %}
+        {% endif %}
+    </article>
+{% endblock %}

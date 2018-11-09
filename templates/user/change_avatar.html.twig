@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block title %}Zmień Avatar{% endblock %}
+
+{% block body %}
+    <div class="panel">
+        <h3>Zmień avatar</h3>
+        <hr>
+
+        {% for flashMessage in app.session.flashbag.get('success') %}
+            <div class="alert alert-success">{{ flashMessage }}</div>
+        {% endfor %}
+
+        <div class="media">
+            <img class="mr-2 thumbnail" width="150" height="150" src="{{ asset('upload/avatar/') ~ app.user.avatar }}" alt="">
+            <div class="media-body">
+                <div class="description">
+                    <h1>Aktualny avatar</h1>
+                </div>
+                <p class="p-0 m-0">
+                    Awatar to mały obrazek widoczny przy każdej wypowiedzi użytkownika.
+                </p>
+                <p class="p-0 m-0">
+                    Minimalne wymiary awatara to 50x50 pikseli.
+                </p>
+                <p class="p-0 m-0">
+                    Maksymalne wymiary awatara to 200x200 pikseli.
+                </p>
+                <p class="p-0 m-0">
+                    Maksymalny rozmiar awatara to 50 KB.
+                </p>
+                <p class="p-0 m-0">
+                    <b>W tej chwili używasz obrazka wysłanego na serwer. Jeśli zdecydujesz się na zmianę awatara, stary obrazek zostanie usunięty.</b>
+                </p>
+            </div>
+        </div>
+
+        <hr>
+
+        {{ form(form) }}
+    </div>
+{% endblock %}
