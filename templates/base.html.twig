@@ -124,7 +124,7 @@
                             <ul class="li"><b>Artykułów: </b>{{ countArticles }}</ul>
                             <ul class="li"><b>Komentarzy: </b>{{ countComments }}</ul>
                             <ul class="li"><b>Użytkowników: </b>{{ countUsers }}</ul>
-                            <ul class="li"><b>Najnowszy użytk.: </b>{{ lastRegisterUser.username }}</ul>
+                            <ul class="li"><b>Najnowszy użytk.: </b><a href="{{ path('user_show', {'id': lastRegisterUser.id}) }}">{{ lastRegisterUser.username }}</a></ul>
                         </div>
                     </div>
                 </div>
