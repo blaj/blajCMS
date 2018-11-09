@@ -7,7 +7,7 @@
 {% block body %}
     <article class="panel">
         <div class="media">
-            <img class="mr-2 thumbnail" src="{{ asset(article.image) }}" alt="">
+            <img class="mr-2 thumbnail" width="150" src="{{ asset('upload/article/') ~ article.image }}" alt="">
             <div class="media-body">
                 <div class="description">
                     <h1>{{ article.title }}</h1>

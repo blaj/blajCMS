@@ -28,7 +28,8 @@ class HomeController extends AbstractController
 
         $queryBuilder = $manager->createQueryBuilder()
             ->select('u')
-            ->from(Article::class, 'u');
+            ->from(Article::class, 'u')
+            ->orderBy('u.id', 'DESC');;
         $adapter = new DoctrineORMAdapter($queryBuilder);
 
         $pager = new Pagerfanta($adapter);

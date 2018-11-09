@@ -23,7 +23,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="">Admin Panel</a>
+            <a class="navbar-brand" href="{{ path('admin') }}">Panel administracyjny</a>
         </div>
 
         <ul class="nav navbar-top-links navbar-right">
@@ -32,12 +32,12 @@
                     <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
-                    <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                    <li><a href="#"><i class="fa fa-user fa-fw"></i> Profil</a>
                     </li>
-                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> Ustawienia</a>
                     </li>
                     <li class="divider"></li>
-                    <li><a href=""><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    <li><a href="{{ path('app_logout') }}"><i class="fa fa-sign-out fa-fw"></i> Wyloguj</a>
                     </li>
                 </ul>
             </li>
@@ -47,16 +47,16 @@
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
                     <li>
-                        <a href=""><i class="fa fa-dashboard fa-fw"></i> Strona główna</a>
+                        <a href="{{ path('admin') }}"><i class="fa fa-dashboard fa-fw"></i> Strona główna</a>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-edit fa-fw"></i> Artykuły<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="">Lista artykułów</a>
+                                <a href="{{ path('admin_articles') }}">Lista artykułów</a>
                             </li>
                             <li>
-                                <a href="">Dodaj nowy</a>
+                                <a href="{{ path('admin_articles_add') }}">Dodaj nowy</a>
                             </li>
                         </ul>
                     </li>

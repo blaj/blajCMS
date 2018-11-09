@@ -53,7 +53,7 @@
                             </li>
                             {% if is_granted("ROLE_ADMIN") %}
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ path('admin') }}"><i class="fas fa-sign-out-alt"></i>Panel administracyjny</a>
+                                    <a class="nav-link" href="{{ path('admin') }}" target="_blank"><i class="fas fa-sign-out-alt"></i>Panel administracyjny</a>
                                 </li>
                             {% endif %}
                             <li class="nav-item">
@@ -107,7 +107,7 @@
                             <ul>
                                 {% if lastComments %}
                                     {% for lastComment in lastComments %}
-                                        <li><a href="{{ path('article_show', {'id': lastComment.article.id}) }}">{{ lastComment.content[:20] ~ '...' }}</a></li>
+                                        <li><a href="{{ path('article_show', {'id': lastComment.article.id}) }}">{{ lastComment.content[:30] ~ '...' }}</a></li>
                                     {% endfor %}
                                 {% else %}
                                     Brak komentarzy

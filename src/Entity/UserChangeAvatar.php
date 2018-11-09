@@ -24,7 +24,7 @@ class UserChangeAvatar
         return $this->avatar;
     }
 
-    public function setAvatar($avatar)
+    public function setAvatar($avatar): self
     {
         $this->avatar = $avatar;
 

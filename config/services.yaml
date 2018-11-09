@@ -6,6 +6,7 @@
 parameters:
     locale: 'pl'
     upload_avatar_directory: '%kernel.project_dir%/public/upload/avatar'
+    upload_article_directory: '%kernel.project_dir%/public/upload/article'
 
 services:
     # default configuration for services in *this* file
