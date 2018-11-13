@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Article;
+use App\Entity\ArticleCategory;
 use App\Entity\Comment;
 use App\Entity\Message;
 use App\Entity\MessageTopic;
@@ -105,25 +106,34 @@ class AppFixtures extends Fixture
             }
         }
 
-        for ($i = 0; $i < 100; $i++) {
-            $article = new Article();
-            $article->setTitle($faker->sentence)
+        for ($k = 0; $k < 5; $k++) {
+            $article_category = new ArticleCategory();
+            $article_category->setTitle($faker->sentence(1))
+                             ->setDescription(join($faker->paragraphs(3)));
+
+            $manager->persist($article_category);
+
+            for ($i = 0; $i < 3; $i++) {
+                $article = new Article();
+                $article->setTitle($faker->sentence)
                     ->setContent(join($faker->paragraphs(6)))
                     ->setCreatedAt(new \DateTime())
                     ->setImage('default.jpg')
-                    ->setUser($user);
+                    ->setUser($user)
+                    ->setCategory($article_category);
 
-            $manager->persist($article);
+                $manager->persist($article);
 
-            for ($j = 0; $j < mt_rand(3, 6); $j++) {
-                $comment = new Comment();
-                $comment->setContent(join($faker->paragraphs(2)))
+                for ($j = 0; $j < mt_rand(3, 6); $j++) {
+                    $comment = new Comment();
+                    $comment->setContent(join($faker->paragraphs(2)))
                         ->setCreatedAt(new \DateTime())
                         ->setUser($user)
                         ->setArticle($article)
                         ->setReputation(mt_rand(-10, 10));
 
-                $manager->persist($comment);
+                    $manager->persist($comment);
+                }
             }
         }
 

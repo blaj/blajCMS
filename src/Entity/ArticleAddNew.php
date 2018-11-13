@@ -30,11 +30,13 @@ class ArticleAddNew
      *  minHeight = 50,
      *  maxHeight = 500,
      *  allowSquare = true,
-     *  allowPortrait = false,
-     *  allowLandscape = false
+     *  allowPortrait = true,
+     *  allowLandscape = true
      * )
      */
     private $image;
+
+    private $category;
 
     public function getTitle(): ?string
     {
@@ -68,6 +70,18 @@ class ArticleAddNew
     public function setImage($image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    public function setCategory($category): self
+    {
+        $this->category = $category;
 
         return $this;
     }

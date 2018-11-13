@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Article;
+use App\Entity\ArticleCategory;
 use App\Entity\Comment;
 use App\Entity\CommentReputation;
 use App\Form\CommentAddType;
@@ -73,6 +74,21 @@ class HomeController extends AbstractController
         return $this->render('home/show.html.twig', [
             'article' => $article,
             'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/article/categories/{id}", name="article_categories")
+     */
+    public function article_categories(ArticleCategory $articleCategory)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $articles = $em->getRepository(Article::class)->findBy(['category' => $articleCategory->getId()]);
+
+        return $this->render('home/categories.html.twig', [
+            'articles' => $articles,
+            'category' => $articleCategory
         ]);
     }
 

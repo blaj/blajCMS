@@ -39,9 +39,9 @@
             </div>
             <div class="article-wrap">
                 <ul class="tags mt-10">
-                    <li><a href="#">Food Habit</a></li>
+                    <li><a href="{{ path('article_categories', {'id': article.category.id}) }}">{{ article.category.title }}</a></li>
                 </ul>
-                <a href="#">
+                <a href="{{ path('article_show', {'id': article.id}) }}">
                     <h1>{{ article.title }}</h1>
                 </a>
                 <ul class="meta pb-20">

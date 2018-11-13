@@ -4,9 +4,14 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Entity\ArticleAddNew;
+use App\Entity\ArticleCategory;
+use App\Entity\ArticleCategoryAddNew;
+use App\Entity\User;
 use App\Form\ArticleAddNewType;
+use App\Form\ArticleCategoryAddNewType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\FrameworkBundle\Tests\Fixtures\Validation\Category;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -77,7 +82,8 @@ class AdminController extends AbstractController
                     ->setContent($articleAddNew->getContent())
                     ->setCreatedAt(new \DateTime())
                     ->setUser($this->getUser())
-                    ->setImage($fileName);
+                    ->setImage($fileName)
+                    ->setCategory($articleAddNew->getCategory());
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($article);
@@ -128,6 +134,88 @@ class AdminController extends AbstractController
 
         return $this->render('admin/articles_modify.html.twig', [
             'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/admin/categories", name="admin_categories")
+     */
+    public function categories()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $categories = $em->getRepository(ArticleCategory::class)->findAll();
+
+        return $this->render('admin/categories.html.twig', [
+            'categories' => $categories
+        ]);
+    }
+
+    /**
+     * @Route("/admin/categories/add", name="admin_categories_add")
+     */
+    public function categories_add(Request $request)
+    {
+        $categoryAddNew = new ArticleCategoryAddNew();
+        $form = $this->createForm(ArticleCategoryAddNewType::class, $categoryAddNew);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $category = new ArticleCategory();
+            $category->setTitle($categoryAddNew->getTitle())
+                     ->setDescription($categoryAddNew->getDescription());
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($category);
+            $em->flush();
+
+            $this->addFlash('success', 'Kategoria artykułów została dodana!');
+            return $this->redirectToRoute('admin_categories');
+        }
+
+        return $this->render('admin/categories_add.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/admin/categories/modify/{id}", name="admin_categories_modify")
+     */
+    public function categories_modify(ArticleCategory $articleCategory, Request $request)
+    {
+        $categoryModify = new ArticleCategoryAddNew();
+        $categoryModify->setTitle($articleCategory->getTitle())
+                       ->setDescription($articleCategory->getDescription());
+
+        $form = $this->createForm(ArticleCategoryAddNewType::class, $categoryModify);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $articleCategory->setTitle($categoryModify->getTitle())
+                            ->setDescription($categoryModify->getDescription());
+
+            $em = $this->getDoctrine()->getManager();
+            $em->merge($articleCategory);
+            $em->flush();
+
+            $this->addFlash('success', 'Kategoria artykułów została zmodyfikowana!');
+            return $this->redirectToRoute('admin_categories');
+        }
+
+        return $this->render('admin/categories_modify.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/admin/users", name="admin_users")
+     */
+    public function users()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $users = $em->getRepository(User::class)->findAll();
+
+        return $this->render('admin/users.html.twig', [
+            'users' => $users
         ]);
     }
 }

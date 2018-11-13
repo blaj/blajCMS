@@ -12,15 +12,15 @@
             <thead>
             <tr>
                 <th scope="col">Tytuł wiadomości</th>
-                <th scope="col">Nadawca</th>
+                <th scope="col">Odbiorca</th>
                 <th scope="col">Data wysłania</th>
             </tr>
             </thead>
             <tbody>
-            {% for messageTopic in app.user.messageTopicsTo|sort|reverse %}
+            {% for messageTopic in app.user.messageTopicsFrom|sort|reverse %}
                 <tr>
                     <td><a href="{{ path('messages_read', {'id': messageTopic.id}) }}">{{ messageTopic.title[:50] ~ '...' }}</a></td>
-                    <td>{{ messageTopic.fromUser.username }}</td>
+                    <td>{{ messageTopic.toUser.username }}</td>
                     <td>{{ messageTopic.sendAt | date('d/m/y, H:i') }}</td>
                 </tr>
             {% endfor %}

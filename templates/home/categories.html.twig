@@ -5,13 +5,13 @@
 {% block body %}
     <div class="content">
         <div class="heading">
-            Ostatnie Artykuły
+            Artykuły z Kategorii: {{ category.title }}
         </div>
 
         <div class="articles">
 
-            {% if articles.currentPageResults %}
-                {% for article in articles.currentPageResults %}
+            {% if articles %}
+                {% for article in articles %}
 
             <article>
                 <div class="row">
@@ -20,7 +20,7 @@
                             <img src="{{ asset('upload/article/') ~ article.image }}" alt="">
                         </div>
                         <div class="tags">
-                            <a href="{{ path('article_categories', {'id': article.category.id}) }}">{{ article.category.title }}</a>
+                            <a href="#">{{ article.category.title }}</a>
                         </div>
                     </div>
                     <div class="col-lg-7">
@@ -40,13 +40,6 @@
 
                 {% endfor %}
             {% endif %}
-
-            {{ pagerfanta(articles, 'twitter_bootstrap4', {
-                'routeName': 'home_page',
-                'routeParams': {},
-                'next_message': 'Dalej →',
-                'prev_message': '← Wstecz'
-            }) }}
         </div>
     </div>
 
