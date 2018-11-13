@@ -7,4 +7,5 @@
     <li>Article with categories</li>
     <li>Private messages</li>
     <li>Admin panel</li>
+    <li>and more...</li>
 </ul>

@@ -17,14 +17,14 @@
         {% for message in topic.messages %}
 
             <div class="media">
-                <img class="mr-2 thumbnail" width="80" height="80" src="{{ asset('upload/avatar/') ~ message.user.avatar }}" alt="">
-                <div class="media-body comment p-3">
-                    <div class="description">
+                <img class="thumbnail" width="80" height="80" src="{{ asset('upload/avatar/') ~ message.user.avatar }}" alt="">
+                <div class="media-body">
+                    <div class="description" >
                         <div class="float-left">
                             Wysłana przez <b><a href="{{ path('user_show', {'id': message.user.id}) }}">{{ message.user.username }}</a></b>, {{ message.sendAt | date('d/m/y, H:i') }}
                         </div>
                     </div>
-                    <div class="float-left mt-1 comment_actions">
+                    <div class="float-left mt-1 read-message">
                         <p>{{ message.content }}</p>
                     </div>
                 </div>

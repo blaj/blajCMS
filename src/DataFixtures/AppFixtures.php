@@ -26,10 +26,10 @@ class AppFixtures extends Fixture
         $faker = \Faker\Factory::create('pl_PL');
 
         $user = new User();
-        $user->setUsername('blaj')
+        $user->setUsername('admin')
              ->setRoles(['ROLE_ADMIN'])
-             ->setPassword($this->passwordEncoder->encodePassword($user, 'test'))
-             ->setEmail('test@test.pl')
+             ->setPassword($this->passwordEncoder->encodePassword($user, 'admin'))
+             ->setEmail('admin@admin.pl')
              ->setAvatar('default.png')
              ->setRegisteredAt(new \DateTime())
              ->setReputation(0);
@@ -37,10 +37,10 @@ class AppFixtures extends Fixture
         $manager->persist($user);
 
         $user2 = new User();
-        $user2->setUsername('testowy')
-              ->setPassword($this->passwordEncoder->encodePassword($user, 'test'))
+        $user2->setUsername('blaj')
+              ->setPassword($this->passwordEncoder->encodePassword($user, 'admin'))
               ->setEmail('test@test2.pl')
-              ->setAvatar('default.png')
+              ->setAvatar('default2.jpg')
               ->setRegisteredAt(new \DateTime())
               ->setReputation(0);
 
@@ -129,6 +129,15 @@ class AppFixtures extends Fixture
                     $comment->setContent(join($faker->paragraphs(2)))
                         ->setCreatedAt(new \DateTime())
                         ->setUser($user)
+                        ->setArticle($article)
+                        ->setReputation(mt_rand(-10, 10));
+
+                    $manager->persist($comment);
+
+                    $comment = new Comment();
+                    $comment->setContent(join($faker->paragraphs(2)))
+                        ->setCreatedAt(new \DateTime())
+                        ->setUser($user2)
                         ->setArticle($article)
                         ->setReputation(mt_rand(-10, 10));
 

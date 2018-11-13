@@ -105,7 +105,8 @@ class AdminController extends AbstractController
     {
         $articleModify = new ArticleAddNew();
         $articleModify->setTitle($article->getTitle())
-                      ->setContent($article->getContent());
+                      ->setContent($article->getContent())
+                      ->setCategory($article->getCategory());
 
         $form = $this->createForm(ArticleAddNewType::class, $articleModify);
 

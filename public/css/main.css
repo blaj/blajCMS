@@ -133,6 +133,14 @@ li.page-item a:hover.page-link {
     border-radius: 0;
 }
 
+.media-body {
+    margin-left: 20px;
+}
+
+b {
+    color: #000000;
+}
+
 /*********************************
 1. HEADER
  ********************************/
@@ -382,6 +390,11 @@ main .content article.read .new-comment .form-control {
 
 main .content article.read .new-comment .btn {
     border: 1px solid #f6214b;
+}
+
+main .content .read-message {
+    float: left;
+    width: 100%;
 }
 
 main .sidebar {
