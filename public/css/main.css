@@ -1,0 +1,567 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&subset=latin-ext');
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+    color: #777777;
+    background: #ecf0f1;
+}
+
+/*********************************
+0. GLOBAL
+ ********************************/
+h1 {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+h3 {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+h5 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+}
+
+h6 {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+p {
+    color: #777777;
+    font-size: 14px;
+    text-align: justify;
+}
+
+a {
+    color: #000000;
+    transition: 0.3s ease;
+}
+
+a:hover {
+    color: #f6214b;
+    transition: 0.3s ease;
+    text-decoration: none;
+}
+
+ul.meta {
+    list-style-type: none;
+    margin: 6px 0;
+    padding: 0;
+}
+
+ul.meta li {
+    display: inline-block;
+    margin-right: 12px;
+}
+
+ul.meta li a {
+    color: #777777;
+    font-size: 12px;
+    font-weight: 200;
+}
+
+ul.meta li a:hover {
+    text-decoration: none;
+    color: #222222;
+}
+
+ul.meta li a i {
+    margin-right: 5px;
+}
+
+.form-group {
+    margin: 10px 0;
+}
+
+.form-control {
+    background: #ecf0f1;
+    border-radius: 0;
+    color: #ccc;
+    font-size: 14px;
+}
+
+.form-check-label {
+    color: #777777;
+    font-size: 14px;
+}
+
+.btn {
+    background: #f6214b;
+    color: #ffffff;
+    border-radius: 0;
+    font-size: 14px;
+}
+
+.btn:hover {
+    background: #ffffff;
+    color: #f6214b;
+    border-color: #f6214b;
+}
+
+a.page-link {
+    color: #aaaaaa;
+    transition: 0.3s ease;
+    background: #ecf0f1;
+    font-size: 14px;
+}
+
+a:hover.page-link {
+    transition: 0.3s ease;
+    background: #f6214b;
+    color: #ffffff;
+    border-color: #f6214b;
+}
+
+/*********************************
+1. HEADER
+ ********************************/
+header .logo {
+    background: #ffffff;
+    color: #000000;
+    padding: 32px 0;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+header .navbar {
+    background: #04091e;
+}
+
+header .navbar a {
+    color: #ffffff;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+header .navbar a:hover {
+    color: #f6214b;
+}
+
+header .navbar .nav-item {
+    margin: 8px 12px;
+}
+
+header .navbar .dropdown-menu {
+    margin-top: 16px;
+    border-radius: 0;
+}
+
+header .navbar  a.dropdown-item {
+    color: #000000;
+    font-weight: 400;
+    padding: 12px 18px;
+    transition: 0.3s ease;
+}
+
+header .navbar  a:hover.dropdown-item {
+    color: #f6214b;
+    transition: 0.3s ease;
+}
+
+.navbar-toggler {
+    color: #ffffff;
+    padding: 8px;
+}
+
+/*********************************
+2. MAIN
+ ********************************/
+main {
+}
+
+main .content {
+    background: #ffffff;
+    padding: 18px;
+    margin: 20px 0;
+}
+
+main .content .heading {
+    background: #04091e;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 6px 24px;
+    margin-bottom: 20px;
+}
+
+main .content .articles {
+    color: #000000;
+}
+
+main .content .articles article {
+    margin-bottom: 20px;
+}
+
+main .content .articles article:last-child {
+    margin-bottom: 0;
+}
+
+main .content .articles article img {
+    width: 100%;
+}
+
+main .content .articles article .tags {
+    position: absolute;
+    bottom: 10px;
+    color: #ffffff;
+    padding: 4px 32px;
+    background: #f6214b;
+}
+
+main .content .articles article .tags a {
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 200;
+}
+
+main .content .articles article .tags a:hover {
+    color: #ffffff;
+}
+
+@media (max-width: 1199.98px) {
+    main .content .articles article .tags {
+        bottom: 50px;
+    }
+}
+
+@media (max-width: 991.98px) {
+    main .content .articles article img {
+        margin-bottom: 10px;
+    }
+
+    main .content .articles article .tags {
+        bottom: 20px;
+    }
+}
+
+main .content article.read .image img {
+    width: 100%;
+}
+
+main .content article.read ul.tags {
+    color: #ffffff;
+    padding: 4px 32px;
+    background: #f6214b;
+}
+
+main .content article.read ul.tags {
+    list-style-type: none;
+    display: inline-block;
+}
+
+main .content article.read ul.tags li {
+    display: inline;
+}
+
+main .content article.read ul.tags li a {
+    color: #ffffff;
+    font-weight: 400;
+    font-size: 12px;
+}
+
+main .content article.read ul.tags li a:hover {
+    color: #ffffff;
+}
+
+main .content article.read .article-wrap {
+    padding: 20px;
+}
+
+main .content article.read .comments {
+    padding: 20px;
+}
+
+main .content article.read .comments h6 {
+    padding: 0 0 50px 0;
+    color: #000000;
+    font-weight: 600;
+}
+
+main .content article.read .comments .comment {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+
+main .content article.read .comments .comment:last-child {
+    border: 0;
+}
+
+main .content article.read .comments .comment .thumb {
+    margin-right: 20px;
+}
+
+main .content article.read .comments .comment .date {
+    font-size: 13px;
+    color: #cccccc;
+}
+
+main .content article.read .comments .comment .reputation {
+    float: right;
+}
+
+main .content article.read .comments .comment .reputation .rep {
+    background: #eeeeee;
+    padding: 2px 10px;
+}
+
+main .content article.read .comments .comment .reputation .plus {
+    padding: 1px 8px;
+}
+
+main .content article.read .comments .comment .reputation .minus {
+    padding: 1px 10px;
+}
+
+main .content article.read .comments .comment .btn-action {
+    background-color: #222;
+    color: #fff;
+    padding: 4px 15px;
+    display: inline-block;
+    -webkit-transition: all 0.3s ease 0s;
+    -moz-transition: all 0.3s ease 0s;
+    -o-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+}
+
+@media (max-width: 414px) {
+    main .content article.read .comments .comment .btn-action {
+        padding: 5px 20px;
+    }
+}
+
+main .content article.read .comments .comment .btn-action:hover {
+    background-color: #f6214b;
+    color: #fff;
+}
+
+main .content article.read .comments .comment .author {
+    display: inline-block;
+}
+
+main .content article.read .comments .comment .reputation {
+    display: inline-block;
+}
+
+main .content article.read .new-comment {
+    background: #ecf0f1;
+    padding: 15px;
+}
+
+main .content article.read .new-comment h3 {
+    color: #000000;
+    margin: 30px 0 40px 0;
+}
+
+main .content article.read .new-comment .form-control {
+    background: #ffffff;
+}
+
+main .content article.read .new-comment .btn {
+    border: 1px solid #f6214b;
+}
+
+main .sidebar {
+    background: #ffffff;
+    padding: 18px;
+    margin: 20px 0;
+    color: #000000;
+}
+
+main .sidebar .heading {
+    background: #04091e;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 6px 24px;
+    margin-bottom: 20px;
+}
+
+main .sidebar .login {
+    margin-bottom: 20px;
+}
+
+main .sidebar .last-comments {
+    margin-bottom: 20px;
+}
+
+main .sidebar {
+    border-bottom: 1px solid #eee;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+
+main .sidebar .last-comments {
+    margin-bottom: 20px;
+}
+
+main .sidebar .last-comments .comment {
+    border-bottom: 1px solid #eee;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+
+main .sidebar .last-comments .comment:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+main .sidebar .last-comments .comment .details {
+    margin-left: 20px;
+}
+
+main .sidebar .newsletter {
+    margin-bottom: 20px;
+}
+
+main .sidebar .stats {
+    margin-bottom: 20px;
+}
+
+main .sidebar .stats ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    color: #777777;
+}
+
+main .sidebar .stats b {
+    color: #000000;
+}
+
+/*********************************
+3. FOOTER
+ ********************************/
+footer {
+    background: #04091e;
+    color: #ffffff;
+    padding: 80px 0;
+}
+
+footer ul {
+    list-style-type: none;
+    margin: 30px 0;
+    padding: 0;
+    font-size: 14px;
+}
+
+footer ul li {
+    line-height: 32px;
+}
+
+footer ul li a {
+    color: #777777;
+    transition: 0.3s ease;
+}
+
+footer ul li a:hover {
+    color: #ffffff;
+    transition: 0.3s ease;
+    text-decoration: none;
+}
+
+footer h4 {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+footer .credits {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 30px;
+}
+
+footer .credits a {
+    color: #f6214b;
+}
+
+footer .credits a:hover {
+    text-decoration: none;
+}
+
+ul.social-list {
+    margin: 0;
+    padding: 0;
+}
+
+.social-list li {
+    margin-bottom: 10px;
+    padding: 9px;
+}
+
+.social-list li a {
+    color: #fff;
+    text-align: right;
+    font-weight: 500;
+    border-left: 1px solid #eee;
+    padding-left: 10px;
+}
+
+.social-list li p {
+    color: #fff;
+}
+
+.social-list .fb {
+    background: #4c63a2;
+}
+
+.social-list .tw {
+    background: #69c9ff;
+}
+
+.social-list .yt {
+    background: #c41713;
+}
+
+.social-list .rs {
+    background: #f17300;
+}
+
+.social-list .icons {
+    text-align: center;
+}
+
+.social-list .icons i {
+    width: 25px;
+    padding: 5px 7px;
+    color: #fff;
+}
+
+.social-list .icons p {
+    margin-left: 10px;
+    border-left: 1px solid #eee;
+    padding-left: 10px;
+}
+
+.social-list .icons .fa-facebook {
+    color: #4c63a2;
+    background: #fff;
+}
+
+.social-list .icons .fa-twitter {
+    color: #69c9ff;
+    background: #fff;
+}
+
+.social-list .icons .fa-youtube-play {
+    color: #c41713;
+    background: #fff;
+}
+
+.social-list .icons .fa-rss {
+    color: #f17300;
+    background: #fff;
+}
+
+.social-list .icons p {
+    margin-bottom: 0px;
+}
