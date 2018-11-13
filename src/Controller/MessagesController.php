@@ -40,29 +40,34 @@ class MessagesController extends AbstractController
      */
     public function read(MessageTopic $messageTopic, Request $request)
     {
-        // TODO: Zabezpiecznie, że tylko odbiorca i nadawca mogą czytać wiadomość
-        $message = new Message();
-        $form = $this->createForm(MessageSendType::class, $message);
+        if ($messageTopic->getToUser()->getId() == $this->getUser()->getId() || $messageTopic->getFromUser()->getId() == $this->getUser()->getId()) {
 
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $message->setTopic($messageTopic)
+            // TODO: Zabezpiecznie, że tylko odbiorca i nadawca mogą czytać wiadomość
+            $message = new Message();
+            $form = $this->createForm(MessageSendType::class, $message);
+
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $message->setTopic($messageTopic)
                     ->setSendAt(new \DateTime())
                     ->setTitle($messageTopic->getTitle())
                     ->setUser($this->getUser());
 
-            $manager = $this->getDoctrine()->getManager();
-            $manager->persist($message);
-            $manager->flush();
+                $manager = $this->getDoctrine()->getManager();
+                $manager->persist($message);
+                $manager->flush();
 
-            $this->addFlash('success', 'Wiadomość została wysłana!');
-            return $this->redirectToRoute('messages_read', ['id' => $messageTopic->getId()]);
+                $this->addFlash('success', 'Wiadomość została wysłana!');
+                return $this->redirectToRoute('messages_read', ['id' => $messageTopic->getId()]);
+            }
+
+            return $this->render('messages/read.html.twig', [
+                'topic' => $messageTopic,
+                'form' => $form->createView()
+            ]);
+        } else {
+            return $this->redirectToRoute('messages_received');
         }
-
-        return $this->render('messages/read.html.twig', [
-            'topic' => $messageTopic,
-            'form' => $form->createView()
-        ]);
     }
 
     /**

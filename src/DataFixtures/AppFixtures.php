@@ -110,7 +110,7 @@ class AppFixtures extends Fixture
             $article->setTitle($faker->sentence)
                     ->setContent(join($faker->paragraphs(6)))
                     ->setCreatedAt(new \DateTime())
-                    ->setImage('default.png')
+                    ->setImage('default.jpg')
                     ->setUser($user);
 
             $manager->persist($article);

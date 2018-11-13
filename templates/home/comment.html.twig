@@ -1,37 +1,36 @@
-<div class="media">
-    <img class="mr-2 thumbnail" width="80" height="80" src="{{ asset('upload/avatar/') ~ comment.user.avatar }}" alt="">
-    <div class="media-body comment p-3">
-        <div class="description">
-            <div class="float-left">
-                Napisany przez <a href="{{ path('user_show', {'id': comment.user.id}) }}">{{ comment.user.username }}</a>, {{ comment.createdAt | date('d/m/y') }}
+<div class="comment">
+    <div class="justify-content-between d-flex">
+        <div class="user justify-content-between d-flex">
+            <div class="thumb">
+                <img width="60" height="60" src="{{ asset('upload/avatar/') ~ comment.user.avatar }}" alt="">
             </div>
-            <div class="text-right">
-                <span class="badge badge-light">
-                    {% if comment.reputation > 0 %}
-                        <span style="color: #12B232;">{{ comment.reputation }}</span>
-                    {% elseif comment.reputation == 0 %}
-                        {{ comment.reputation }}
-                    {% else %}
-                        <span style="color: red;">{{ comment.reputation }}</span>
-                    {% endif %}
-                </span>
+            <div class="desc">
+                <div class="info">
+                    <div class="author">
+                        <h5><a href="#">{{ comment.user.username }}</a></h5>
+                    </div>
 
-                {% if app.user %}
-                    {% if comment.user != app.user %}
-                        <a href="{{ path('comment_add_rep', {'id': comment.id}) }}" title="Daj plusa :)" class="btn btn-success">+</a>
-                        <a href="{{ path('comment_minus_rep', {'id': comment.id}) }}" title="Daj minusa :(" class="btn btn-danger">-</a>
-                    {% endif %}
+                    <div class="reputation">
+                        <span class="rep onplus">{{ comment.reputation }}</span>
+                        {% if app.user %}
+                            {% if comment.user != app.user %}
+                                <a href="{{ path('comment_add_rep', {'id': comment.id}) }}" class="btn-action plus text-uppercase">+</a>
+                                <a href="{{ path('comment_minus_rep', {'id': comment.id}) }}" class="btn-action minus text-uppercase">-</a>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+                <p class="date">{{ comment.createdAt | date('d/m/Y') }} o godzinie {{ comment.createdAt | date('H:i') }}</p>
+                <p>
+                    {{ comment.content }}
+                </p>
+                {% if app.user == comment.user %}
+                    <div class="reply-btn">
+                        <a href="{{ path('comment_modify', {'id': comment.id}) }}" class="btn-action text-uppercase">Edytuj</a>
+                        <a href="{{ path('comment_delete', {'id': comment.id}) }}" class="btn-action text-uppercase">Usuń</a>
+                    </div>
                 {% endif %}
             </div>
-        </div>
-        <div class="float-left mt-1 comment_actions">
-            <p>{{ comment.content }}</p>
-            {% if app.user == comment.user %}
-                <div class="actions">
-                    <a class="btn btn-success" href="{{ path('comment_modify', {'id': comment.id}) }}">Edytuj</a>
-                    <a class="btn btn-danger" href="{{ path('comment_delete', {'id': comment.id}) }}">Usuń</a>
-                </div>
-            {% endif %}
         </div>
     </div>
 </div>

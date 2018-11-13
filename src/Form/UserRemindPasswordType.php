@@ -2,27 +2,27 @@
 
 namespace App\Form;
 
-use App\Entity\UserChangeEmail;
+use App\Entity\UserRemindPassword;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class UserChangeEmailType extends AbstractType
+class UserRemindPasswordType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('plainEmail', RepeatedType::class, [
-                'type' => EmailType::class,
-                'invalid_message' => 'E-Mail\'e nie są takie same!',
-                'first_options'  => array('label' => 'Nowy E-Mail'),
-                'second_options' => array('label' => 'Powtórz E-Mail'),
+            ->add('username', TextType::class, [
+                'label' => 'Nazwa użytkownika'
+            ])
+            ->add('email', EmailType::class, [
+                'label' => 'E-Mail'
             ])
             ->add('submit', SubmitType::class, [
-                'label' => 'Zmień E-Mail',
+                'label' => 'Resetuj hasło',
                 'attr' => array('class' => 'btn btn-success')
             ])
         ;
@@ -31,7 +31,7 @@ class UserChangeEmailType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => UserChangeEmail::class,
+            'data_class' => UserRemindPassword::class,
         ]);
     }
 }

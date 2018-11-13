@@ -7,8 +7,6 @@ use App\Validator\Constraints as AssertCustom;
 
 class UserChangeEmail
 {
-    private $email;
-
     /**
      * @Assert\NotBlank()
      * @Assert\Email(
@@ -18,18 +16,6 @@ class UserChangeEmail
      * @AssertCustom\UniqueEmail()
      */
     private $plainEmail;
-
-    public function getEmail(): string
-    {
-        return (string) $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
 
     public function getPlainEmail(): string
     {

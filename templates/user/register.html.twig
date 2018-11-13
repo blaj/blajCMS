@@ -5,9 +5,10 @@
 {% block title %}Zarejestruj się{% endblock %}
 
 {% block body %}
-    <div class="panel">
-        <h3>Zarejestruj się</h3>
-        <hr>
+    <div class="content">
+        <div class="heading">
+            Rejestracja
+        </div>
 
         {% for flashMessage in app.session.flashbag.get('success') %}
             <div class="alert alert-success">{{ flashMessage }}</div>

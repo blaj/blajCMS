@@ -6,10 +6,12 @@ use App\Entity\User;
 use App\Entity\UserChangeAvatar;
 use App\Entity\UserChangeEmail;
 use App\Entity\UserChangePassword;
+use App\Entity\UserRemindPassword;
 use App\Form\UserChangeAvatarType;
 use App\Form\UserChangeEmailType;
 use App\Form\UserChangePasswordType;
 use App\Form\UserRegisterType;
+use App\Form\UserRemindPasswordType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -155,6 +157,19 @@ class UserController extends AbstractController
     {
         return $this->render('user/show.html.twig', [
             'user' => $user
+        ]);
+    }
+
+    /**
+     * @Route("/user/remindpassword/", name="user_remind_password")
+     */
+    public function remind_password()
+    {
+        $userRemindPassword = new UserRemindPassword();
+        $form = $this->createForm(UserRemindPasswordType::class, $userRemindPassword);
+
+        return $this->render('user/remind_password.html.twig', [
+            'form' => $form->createView()
         ]);
     }
 }

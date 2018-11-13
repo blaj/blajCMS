@@ -93,6 +93,7 @@ ul.meta li a i {
 
 .btn {
     background: #f6214b;
+    border-color: #f6214b;
     color: #ffffff;
     border-radius: 0;
     font-size: 14px;
@@ -104,18 +105,32 @@ ul.meta li a i {
     border-color: #f6214b;
 }
 
-a.page-link {
+li.page-item a.page-link {
     color: #aaaaaa;
     transition: 0.3s ease;
     background: #ecf0f1;
     font-size: 14px;
+    padding: 9.5px;
 }
 
-a:hover.page-link {
+li.page-item a:hover.page-link {
     transition: 0.3s ease;
     background: #f6214b;
     color: #ffffff;
     border-color: #f6214b;
+}
+
+.page-item.disabled .page-link {
+    background: #ecf0f1;
+}
+
+.page-item.active .page-link {
+    background: #f6214b;
+    border-color: #f6214b;
+}
+
+.page-item:first-child .page-link, .page-item:last-child .page-link {
+    border-radius: 0;
 }
 
 /*********************************
@@ -486,82 +501,4 @@ footer .credits a {
 
 footer .credits a:hover {
     text-decoration: none;
-}
-
-ul.social-list {
-    margin: 0;
-    padding: 0;
-}
-
-.social-list li {
-    margin-bottom: 10px;
-    padding: 9px;
-}
-
-.social-list li a {
-    color: #fff;
-    text-align: right;
-    font-weight: 500;
-    border-left: 1px solid #eee;
-    padding-left: 10px;
-}
-
-.social-list li p {
-    color: #fff;
-}
-
-.social-list .fb {
-    background: #4c63a2;
-}
-
-.social-list .tw {
-    background: #69c9ff;
-}
-
-.social-list .yt {
-    background: #c41713;
-}
-
-.social-list .rs {
-    background: #f17300;
-}
-
-.social-list .icons {
-    text-align: center;
-}
-
-.social-list .icons i {
-    width: 25px;
-    padding: 5px 7px;
-    color: #fff;
-}
-
-.social-list .icons p {
-    margin-left: 10px;
-    border-left: 1px solid #eee;
-    padding-left: 10px;
-}
-
-.social-list .icons .fa-facebook {
-    color: #4c63a2;
-    background: #fff;
-}
-
-.social-list .icons .fa-twitter {
-    color: #69c9ff;
-    background: #fff;
-}
-
-.social-list .icons .fa-youtube-play {
-    color: #c41713;
-    background: #fff;
-}
-
-.social-list .icons .fa-rss {
-    color: #f17300;
-    background: #fff;
-}
-
-.social-list .icons p {
-    margin-bottom: 0px;
 }

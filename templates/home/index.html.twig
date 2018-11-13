@@ -3,9 +3,7 @@
 {% block title %}Strona Główna{% endblock %}
 
 {% block body %}
-    {% if articles.currentPageResults %}
-        {% for article in articles.currentPageResults %}
-            <article class="panel">
+            {#<article class="panel">
                 <div class="media">
                     <img class="mr-2 thumbnail" width="150" src="{{ asset('upload/article/') ~ article.image }}" alt="">
                     <div class="media-body">
@@ -16,17 +14,63 @@
                         <p>{{ article.content[:300] ~ '...' }} <a href="{{ path('article_show', {'id': article.id}) }}">Czytaj całość</a></p>
                     </div>
                 </div>
-            </article>
-        {% endfor %}
-    {% endif %}
+            </article>#}
 
-    <div class="d-flex justify-content-center">
+    {#<div class="d-flex justify-content-center">
         {{ pagerfanta(articles, 'twitter_bootstrap4', {
             'routeName': 'home_page',
             'routeParams': {},
             'next_message': 'Dalej →',
             'prev_message': '← Wstecz'
         }) }}
+    </div>
+#}
+
+    <div class="content">
+        <div class="heading">
+            Ostatnie Artykuły
+        </div>
+
+        <div class="articles">
+
+            {% if articles.currentPageResults %}
+                {% for article in articles.currentPageResults %}
+
+            <article>
+                <div class="row">
+                    <div class="col-lg-5">
+                        <div>
+                            <img src="{{ asset('upload/article/') ~ article.image }}" alt="">
+                        </div>
+                        <div class="tags">
+                            <a href="#">Kategoria</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-7">
+                        <h3><a href="{{ path('article_show', {'id': article.id}) }}">{{ article.title }}</a></h3>
+                        <ul class="meta">
+                            <li><a href="{{ path('user_show', {'id': article.user.id}) }}"><i class="far fa-user"></i>{{ article.user.username }}</a></li>
+                            <li><a href="{{ path('article_show', {'id': article.id}) }}"><i class="far fa-calendar-alt"></i>{{ article.createdAt | date('m/d/Y') }}</a></li>
+                            <li><a href="{{ path('article_show', {'id': article.id}) }}"><i class="far fa-comments"></i>{{ article.comments | length }} Komentarze</a></li>
+                        </ul>
+                        <p>
+                            {{ article.content[:200] ~ '...' }}
+                        </p>
+                    </div>
+                </div>
+            </article>
+
+
+                {% endfor %}
+            {% endif %}
+
+            {{ pagerfanta(articles, 'twitter_bootstrap4', {
+                'routeName': 'home_page',
+                'routeParams': {},
+                'next_message': 'Dalej →',
+                'prev_message': '← Wstecz'
+            }) }}
+        </div>
     </div>
 
 {% endblock %}

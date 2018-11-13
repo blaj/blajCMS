@@ -37,7 +37,7 @@
                                             <td>{{ article.id }}</td>
                                             <td>{{ article.title }}</td>
                                             <td><a href="{{ path('admin_articles_modify', {'id': article.id}) }}" class="btn btn-success">Edytuj</a></td>
-                                            <td><a href="{{ path('admin_articles_delete', {'id': article.id}) }}" class="btn btn-danger">Usuń</a></td>
+                                            <td><a onclick="return confirm('Na pewno chcesz usunąć ten artykuł?')" href="{{ path('admin_articles_delete', {'id': article.id}) }}" class="btn btn-danger">Usuń</a></td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>

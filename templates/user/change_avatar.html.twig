@@ -5,19 +5,16 @@
 {% block title %}Zmień Avatar{% endblock %}
 
 {% block body %}
-    <div class="panel">
-        <h3>Zmień avatar</h3>
-        <hr>
-
-        {% for flashMessage in app.session.flashbag.get('success') %}
-            <div class="alert alert-success">{{ flashMessage }}</div>
-        {% endfor %}
+    <div class="content">
+        <div class="heading">
+            Zmień Avatar
+        </div>
 
         <div class="media">
             <img class="mr-2 thumbnail" width="150" height="150" src="{{ asset('upload/avatar/') ~ app.user.avatar }}" alt="">
             <div class="media-body">
                 <div class="description">
-                    <h1>Aktualny avatar</h1>
+                    <h1><a href="">Aktualny avatar</a></h1>
                 </div>
                 <p class="p-0 m-0">
                     Awatar to mały obrazek widoczny przy każdej wypowiedzi użytkownika.
@@ -37,7 +34,9 @@
             </div>
         </div>
 
-        <hr>
+        {% for flashMessage in app.session.flashbag.get('success') %}
+            <div class="alert alert-success">{{ flashMessage }}</div>
+        {% endfor %}
 
         {{ form(form) }}
     </div>

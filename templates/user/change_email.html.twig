@@ -5,9 +5,10 @@
 {% block title %}Zmień E-Mail{% endblock %}
 
 {% block body %}
-    <div class="panel">
-        <h3>Zmień E-Mail</h3>
-        <hr>
+    <div class="content">
+        <div class="heading">
+            Zmień E-Mail
+        </div>
 
         {% for flashMessage in app.session.flashbag.get('success') %}
             <div class="alert alert-success">{{ flashMessage }}</div>

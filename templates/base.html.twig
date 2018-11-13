@@ -1,145 +1,225 @@
-<!DOCTYPE html>
-<html lang="pl">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <title>CraftyAdmin - {% block title %}{% endblock %}</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:400,700,900&amp;subset=latin-ext" rel="stylesheet">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-        <div class="container-fluid header">
-            <div class="logo">
-                blajCMS
-            </div>
-        </div>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+
+    <title>blajCMS - {% block title %}{% endblock %}</title>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+    <div class="logo">
         <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+            blajCMS
+        </div>
+    </div>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('home') }}"><i class="fas fa-home"></i>Strona główna</a>
+    <nav class="navbar navbar-expand-lg" id="navbarMain">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+                Menu
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('home') }}">Strona główna</a>
+                    </li>
+                    {% if app.user %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="userPanel" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Panel użytkownika
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="userPanel">
+                                <a class="dropdown-item" href="{{ path('user') }}">Informacje</a>
+                                <a class="dropdown-item" href="{{ path('user_change_password') }}">Zmień hasło</a>
+                                <a class="dropdown-item" href="{{ path('user_change_email') }}">Zmień E-Mail</a>
+                                <a class="dropdown-item" href="{{ path('user_change_avatar') }}">Zmień avatar</a>
+                            </div>
                         </li>
-                        {% if app.user %}
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="userPanel" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-user"></i>Panel użytkownika
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="userPanel">
-                                    <a class="dropdown-item" href="{{ path('user') }}">Informacje</a>
-                                    <a class="dropdown-item" href="{{ path('user_change_password') }}">Zmień hasło</a>
-                                    <a class="dropdown-item" href="{{ path('user_change_email') }}">Zmień E-Mail</a>
-                                    <a class="dropdown-item" href="{{ path('user_change_avatar') }}">Zmień avatar</a>
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="messages" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-envelope"></i>Wiadomości
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="messages">
-                                    <a class="dropdown-item" href="{{ path('messages_received') }}">Otrzymane wiadomości</a>
-                                    <a class="dropdown-item" href="{{ path('messages_sent') }}">Wysłane wiadomości</a>
-                                    <a class="dropdown-item" href="{{ path('messages_send') }}">Wyślij nową</a>
-                                </div>
-                            </li>
-                            {% if is_granted("ROLE_ADMIN") %}
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ path('admin') }}" target="_blank"><i class="fas fa-sign-out-alt"></i>Panel administracyjny</a>
-                                </li>
-                            {% endif %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="messages" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Wiadomości
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="messages">
+                                <a class="dropdown-item" href="{{ path('messages_received') }}">Otrzymane wiadomości</a>
+                                <a class="dropdown-item" href="{{ path('messages_sent') }}">Wysłane wiadomości</a>
+                                <a class="dropdown-item" href="{{ path('messages_send') }}">Wyślij nową</a>
+                            </div>
+                        </li>
+                        {% if is_granted("ROLE_ADMIN") %}
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ path('app_logout') }}"><i class="fas fa-sign-out-alt"></i>Wyloguj się</a>
-                            </li>
-                        {% else %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ path('user_register') }}"><i class="fas fa-user-plus"></i>Zarejestruj się</a>
+                                <a class="nav-link" href="{{ path('admin') }}" target="_blank">Panel administracyjny</a>
                             </li>
                         {% endif %}
-                    </ul>
-                </div>
-            </nav>
-            <div class="row">
-                <!-- CONTENT -->
-                <div class="col-lg-9">
-                    {% block body %}{% endblock %}
-                </div>
-
-                <!-- SUB PANEL -->
-                <div class="col-lg-3">
-                    {% if not app.user %}
-                    <div class="subpanel">
-                        <div class="subpanel-heading">
-                            <i class="fas fa-sign-in-alt"></i>Zaloguj się
-                        </div>
-                        <div class="subpanel-body">
-                            <form method="post" action="{{ path('app_login') }}">
-                                <div class="form-group">
-                                    <input type="text" name="username" class="form-control" placeholder="Wpisz nazwę użytkownika">
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" name="password" class="form-control" placeholder="Wpisz hasło">
-                                </div>
-                                <div class="form-group form-check">
-                                    <input type="checkbox" name="_remember_me" class="form-check-input">
-                                    <label class="form-check-label">Zapamiętaj mnie</label>
-                                </div>
-                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                                <button type="submit" class="btn btn-success">Zaloguj się</button>
-                            </form>
-                        </div>
-                    </div>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_logout') }}">Wyloguj się</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('user_register') }}">Zarejestruj się</a>
+                        </li>
                     {% endif %}
-
-                    <div class="subpanel">
-                        <div class="subpanel-heading">
-                            <i class="fas fa-book"></i>Ostatnie komentarze
-                        </div>
-                        <div class="subpanel-body">
-                            <ul>
-                                {% if lastComments %}
-                                    {% for lastComment in lastComments %}
-                                        <li><a href="{{ path('article_show', {'id': lastComment.article.id}) }}">{{ lastComment.content[:30] ~ '...' }}</a></li>
-                                    {% endfor %}
-                                {% else %}
-                                    Brak komentarzy
-                                {% endif %}
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="subpanel">
-                        <div class="subpanel-heading">
-                            <i class="fas fa-file-invoice"></i>Statystyki
-                        </div>
-                        <div class="subpanel-body">
-                            <ul class="li"><b>Artykułów: </b>{{ countArticles }}</ul>
-                            <ul class="li"><b>Komentarzy: </b>{{ countComments }}</ul>
-                            <ul class="li"><b>Użytkowników: </b>{{ countUsers }}</ul>
-                            <ul class="li"><b>Najnowszy użytk.: </b><a href="{{ path('user_show', {'id': lastRegisterUser.id}) }}">{{ lastRegisterUser.username }}</a></ul>
-                        </div>
-                    </div>
-                </div>
+                </ul>
             </div>
-            <hr>
-            <p class="text-center">
-                <a href="#">blaj.pl</a> &copy; 2018 | blajCMS by: <a href="http://blaj.pl">Blaj</a>
-                <br>
-                <span class="text-black-50">Stworzone w Symfony4 & Bootstrap4</span>
-            </p>
         </div>
 
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-        {% block javascripts %}{% endblock %}
-    </body>
+    </nav>
+</header>
+
+<!-- Main -->
+<main class="container">
+    <div class="row">
+        <div class="col-lg-8">
+            {% block body %}{% endblock %}
+        </div>
+        <div class="col-lg-4">
+            <div class="sidebar">
+                {% if not app.user %}
+                    <div class="login">
+                        <div class="heading">
+                            Logowanie
+                        </div>
+                        <form method="post" action="{{ path('app_login') }}">
+                            <div class="form-group">
+                                <input type="text" name="username" class="form-control" placeholder="Wpisz nazwę użytkownika">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" name="password" class="form-control" placeholder="Wpisz hasło">
+                            </div>
+                            <div class="form-group form-check">
+                                <input type="checkbox" name="_remember_me" class="form-check-input">
+                                <label class="form-check-label">Zapamiętaj mnie</label>
+                            </div>
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                            <button type="submit" class="btn">Zaloguj się</button>
+                        </form>
+                    </div>
+                {% endif %}
+
+                <div class="last-comments">
+                    <div class="heading">
+                        Najnowsze Komentarze
+                    </div>
+
+                    {% if lastComments %}
+                        {% for lastComment in lastComments %}
+                            <div class="comment flex-row d-flex">
+                                <div class="thumb">
+                                    <img width="80" height="80" src="{{ asset('upload/avatar/') ~ lastComment.user.avatar }}" alt="">
+                                </div>
+
+                                <div class="details">
+                                    <h6><a href="{{ path('article_show', {'id': lastComment.article.id }) }}">{{ lastComment.content[:45] ~ '...' }}</a></h6>
+
+                                    <ul class="meta">
+                                        <li><a href="{{ path('user_show', {'id': lastComment.user.id}) }}"><i class="far fa-user"></i>{{ lastComment.user.username }}</a></li>
+                                        <li><a href="#"><i class="far fa-calendar"></i>{{ lastComment.createdAt | date('d/m/Y, H:i') }}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        Brak komentarzy
+                    {% endif %}
+                </div>
+
+                <div class="newsletter">
+                    <div class="heading">
+                        Newsletter
+                    </div>
+                    <p>
+                        Here, I focus on a range of items andfeatures that we use in life without giving them a second thought.
+                    </p>
+                    <form>
+                        <div class="form-group">
+                            <input type="email" class="form-control"aria-describedby="emailHelp" placeholder="Enter email">
+                        </div>
+                        <button type="submit" class="btn">Zapisz się</button>
+                    </form>
+                </div>
+
+                <div class="stats">
+                    <div class="heading">
+                        Statystyki
+                    </div>
+                    <ul>
+                        <li><b>Artykułów: </b>{{ countArticles }}</li>
+                        <li><b>Komentarzy: </b>{{ countComments }}</li>
+                        <li><b>Użytkowników: </b>{{ countUsers }}</li>
+                        <li><b>Najnowszy użytk.: </b><a href="{{ path('user_show', {'id': lastRegisterUser.id}) }}">{{ lastRegisterUser.username }}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <h4>Top Products</h4>
+                <ul>
+                    <li><a href="#">Lorem ipsum</a></li>
+                    <li><a href="#">Lorem ipsum</a></li>
+                    <li><a href="#">Lorem ipsum</a></li>
+                    <li><a href="#">Lorem ipsum</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3">
+                <h4>Top Products</h4>
+                <ul>
+                    <li><a href="#">Lorem ipsum</a></li>
+                    <li><a href="#">Lorem ipsum</a></li>
+                    <li><a href="#">Lorem ipsum</a></li>
+                    <li><a href="#">Lorem ipsum</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3">
+                <h4>Top Products</h4>
+                <ul>
+                    <li><a href="#">Lorem ipsum</a></li>
+                    <li><a href="#">Lorem ipsum</a></li>
+                    <li><a href="#">Lorem ipsum</a></li>
+                    <li><a href="#">Lorem ipsum</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3">
+                <h4>Top Products</h4>
+                <ul>
+                    <li><a href="#">Lorem ipsum</a></li>
+                    <li><a href="#">Lorem ipsum</a></li>
+                    <li><a href="#">Lorem ipsum</a></li>
+                    <li><a href="#">Lorem ipsum</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 credits">
+                Copyright ©2018 All rights reserved | This template is made with <3 by <a href="http://blaj.pl">Blaj</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
 </html>

@@ -5,19 +5,29 @@ namespace App\Entity;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Validator\Constraints as AssertCustom;
 
-class UserChangeEmail
+class UserRemindPassword
 {
-    private $email;
+    /**
+     * @Assert\NotBlank()
+     */
+    private $username;
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Email(
-     *  message = "E-Mail: '{{ value }}' jest niepoprawny!",
-     *  checkMX = true
-     * )
-     * @AssertCustom\UniqueEmail()
      */
-    private $plainEmail;
+    private $email;
+
+    public function getUsername(): string
+    {
+        return (string) $this->username;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
+
+        return $this;
+    }
 
     public function getEmail(): string
     {
@@ -27,18 +37,6 @@ class UserChangeEmail
     public function setEmail(string $email): self
     {
         $this->email = $email;
-
-        return $this;
-    }
-
-    public function getPlainEmail(): string
-    {
-        return (string) $this->plainEmail;
-    }
-
-    public function setPlainEmail(string $plainEmail): self
-    {
-        $this->plainEmail = $plainEmail;
 
         return $this;
     }
