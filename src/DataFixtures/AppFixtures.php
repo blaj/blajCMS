@@ -46,12 +46,14 @@ class AppFixtures extends Fixture
 
         $manager->persist($user2);
 
-        for ($i = 0; $i < mt_rand(3, 6); $i++) {
+        for ($i = 0; $i < mt_rand(1, 2); $i++) {
             $messageTopic = new MessageTopic();
             $messageTopic->setTitle($faker->sentence)
                          ->setSendAt(new \DateTime())
                          ->setFromUser($user)
-                         ->setToUser($user2);
+                         ->setToUser($user2)
+                         ->setReadedFromUser(true)
+                         ->setReadedToUser(false);
 
             $manager->persist($messageTopic);
 
@@ -76,12 +78,14 @@ class AppFixtures extends Fixture
             }
         }
 
-        for ($i = 0; $i < mt_rand(3, 6); $i++) {
+        for ($i = 0; $i < mt_rand(1, 2); $i++) {
             $messageTopic = new MessageTopic();
             $messageTopic->setTitle($faker->sentence)
                 ->setSendAt(new \DateTime())
                 ->setFromUser($user2)
-                ->setToUser($user);
+                ->setToUser($user)
+                ->setReadedFromUser(true)
+                ->setReadedToUser(false);
 
             $manager->persist($messageTopic);
 

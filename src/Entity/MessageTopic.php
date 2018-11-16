@@ -47,6 +47,16 @@ class MessageTopic
 
     private $content;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $readedFromUser;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $readedToUser;
+
     // TODO: walidacja formularza
     // TODO: Sprawdzanie czy nie wysylamy wiadomości do samego siebie
     // TODO: Sprawdzanie czy istnieje taki odbiorca
@@ -151,4 +161,29 @@ class MessageTopic
 
         return $this;
     }
+
+    public function getReadedFromUser(): ?bool
+    {
+        return $this->readedFromUser;
+    }
+
+    public function setReadedFromUser(bool $readedFromUser): self
+    {
+        $this->readedFromUser = $readedFromUser;
+
+        return $this;
+    }
+
+    public function getReadedToUser(): ?bool
+    {
+        return $this->readedToUser;
+    }
+
+    public function setReadedToUser(bool $readedToUser): self
+    {
+        $this->readedToUser = $readedToUser;
+
+        return $this;
+    }
+
 }

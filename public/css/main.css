@@ -176,6 +176,10 @@ header .navbar .dropdown-menu {
     border-radius: 0;
 }
 
+header .navbar .dropdown-menu .dropdown-divider {
+
+}
+
 header .navbar  a.dropdown-item {
     color: #000000;
     font-weight: 400;
@@ -186,6 +190,11 @@ header .navbar  a.dropdown-item {
 header .navbar  a:hover.dropdown-item {
     color: #f6214b;
     transition: 0.3s ease;
+}
+
+header .navbar a:active.dropdown-item {
+    background: #f6214b;
+    color: #ffffff;
 }
 
 .navbar-toggler {

@@ -6,6 +6,7 @@ use App\Entity\Article;
 use App\Entity\ArticleCategory;
 use App\Entity\Comment;
 use App\Entity\CommentReputation;
+use App\Entity\Notification;
 use App\Form\CommentAddType;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
@@ -155,9 +156,16 @@ class HomeController extends AbstractController
                        ->setUser($this->getUser())
                        ->setComment($comment);
 
+            $notification = new Notification();
+            $notification->setTitle('Użytkownik zplusował Twój komentarz')
+                         ->setUser($comment->getUser())
+                         ->setReaded(false)
+                         ->setCreatedAt(new \DateTime());
+
             $manager = $this->getDoctrine()->getManager();
             $manager->merge($comment);
             $manager->persist($commentRep);
+            $manager->persist($notification);
             $manager->flush();
 
             $this->addFlash('success', 'Punkt reputacji został prawidłowo dodany!');
@@ -176,8 +184,16 @@ class HomeController extends AbstractController
         if ($comment->getUser() != $this->getUser()) {
             $comment->setReputation($comment->getReputation()-1);
 
+            $notification = new Notification();
+            $notification->setTitle('Użytkownik zplusował Twój komentarz')
+                ->setUser($comment->getUser())
+                ->setReaded(false)
+                ->setCreatedAt(new \DateTime());
+
+
             $manager = $this->getDoctrine()->getManager();
             $manager->merge($comment);
+            $manager->persist($notification);
             $manager->flush();
 
             $this->addFlash('success', 'Punkt reputacji został prawidłowo odjęty!');

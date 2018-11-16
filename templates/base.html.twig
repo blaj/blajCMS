@@ -50,12 +50,34 @@
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="messages" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {% if isGotNotReadedMessages(app.user) %}
+                                    <span class="badge badge-danger">Nowe</span>
+                                {% endif %}
+
                                 Wiadomości
                             </a>
+
                             <div class="dropdown-menu" aria-labelledby="messages">
-                                <a class="dropdown-item" href="{{ path('messages_received') }}">Otrzymane wiadomości</a>
-                                <a class="dropdown-item" href="{{ path('messages_sent') }}">Wysłane wiadomości</a>
+                                <a class="dropdown-item" href="{{ path('messages_received') }}">
+                                    Otrzymane wiadomości
+                                    {% if isGotNotReadedToUserMessages(app.user) %}
+                                        <span class="badge badge-danger">Nowe</span>
+                                    {% endif %}
+                                </a>
+                                <a class="dropdown-item" href="{{ path('messages_sent') }}">
+                                    Wysłane wiadomości
+                                    {% if isGotNotReadedFromUserMessages(app.user) %}
+                                        <span class="badge badge-danger">Nowe</span>
+                                    {% endif %}
+                                </a>
                                 <a class="dropdown-item" href="{{ path('messages_send') }}">Wyślij nową</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{ path('messages_notifications') }}">
+                                    Powiadomienia
+                                    {% if isGotNoReadedNotifications(app.user) %}
+                                        <span class="badge badge-danger">Nowe</span>
+                                    {% endif %}
+                                </a>
                             </div>
                         </li>
                         {% if is_granted("ROLE_ADMIN") %}

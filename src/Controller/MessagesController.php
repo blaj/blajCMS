@@ -14,11 +14,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @IsGranted("ROLE_USER")
+ */
 class MessagesController extends AbstractController
 {
     /**
      * @Route("/messages/received", name="messages_received")
-     * @IsGranted("ROLE_USER")
      */
     public function received()
     {
@@ -27,7 +29,6 @@ class MessagesController extends AbstractController
 
     /**
      * @Route("/messages/sent", name="messages_sent")
-     * @IsGranted("ROLE_USER")
      */
     public function sent()
     {
@@ -36,24 +37,42 @@ class MessagesController extends AbstractController
 
     /**
      * @Route("/messages/read/{id}", name="messages_read")
-     * @IsGranted("ROLE_USER")
      */
     public function read(MessageTopic $messageTopic, Request $request)
     {
         if ($messageTopic->getToUser()->getId() == $this->getUser()->getId() || $messageTopic->getFromUser()->getId() == $this->getUser()->getId()) {
 
-            // TODO: Zabezpiecznie, że tylko odbiorca i nadawca mogą czytać wiadomość
+            $manager = $this->getDoctrine()->getManager();
+
+            if ($messageTopic->getFromUser() == $this->getUser())
+                $messageTopic->setReadedFromUser(true);
+
+            if ($messageTopic->getToUser() == $this->getUser())
+                $messageTopic->setReadedToUser(true);
+
+            $manager->merge($messageTopic);
+            $manager->flush();
+
             $message = new Message();
             $form = $this->createForm(MessageSendType::class, $message);
 
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
+
+                if ($messageTopic->getFromUser() == $this->getUser())
+                    $messageTopic->setReadedToUser(false)
+                                 ->setReadedFromUser(true);
+                else
+                    $messageTopic->setReadedToUser(true)
+                                 ->setReadedFromUser(false);
+
                 $message->setTopic($messageTopic)
                     ->setSendAt(new \DateTime())
                     ->setTitle($messageTopic->getTitle())
                     ->setUser($this->getUser());
 
-                $manager = $this->getDoctrine()->getManager();
+                $manager->merge($messageTopic);
+
                 $manager->persist($message);
                 $manager->flush();
 
@@ -72,7 +91,6 @@ class MessagesController extends AbstractController
 
     /**
      * @Route("/messages/send", name="messages_send")
-     * @IsGranted("ROLE_USER")
      */
     public function send(Request $request)
     {
@@ -90,7 +108,9 @@ class MessagesController extends AbstractController
                          ->setContent($messageNew->getContent())
                          ->setSendAt(new \DateTime())
                          ->setFromUser($this->getUser())
-                         ->setToUser($toUser);
+                         ->setToUser($toUser)
+                         ->setReadedToUser(false)
+                         ->setReadedFromUser(true);
 
             $manager->persist($messageTopic);
 
@@ -112,5 +132,16 @@ class MessagesController extends AbstractController
         return $this->render('messages/send.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/messages/notifications", name="messages_notifications")
+     */
+    public function notifications()
+    {
+        //TODO: Po otworzeniu nieprzeczytane powiadiomienia zmieniają sie na przeczytane!
+
+
+        return $this->render('messages/notifications.html.twig');
     }
 }
